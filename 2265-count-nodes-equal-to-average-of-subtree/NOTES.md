@@ -1,1 +1,1 @@
-​
+​Solved using postorder traversal.
