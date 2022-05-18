@@ -13,6 +13,15 @@ class Solution {
 public:
     int maxDepth(TreeNode* root) {
         if(!root) return 0;
-        return 1 + max(maxDepth(root->left), maxDepth(root->right));
+        int res = 1;
+        stack<pair<TreeNode*, int>> stack;
+        stack.push(make_pair(root, 1));
+        while(!stack.empty()) {
+            pair<TreeNode*, int> top = stack.top(); stack.pop();
+            res = max(res, top.second);
+            if(top.first->left) stack.push(make_pair(top.first->left, top.second+1));
+            if(top.first->right) stack.push(make_pair(top.first->right, top.second+1));
+        }
+        return res;
     }
 };
