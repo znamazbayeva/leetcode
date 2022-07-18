@@ -1,17 +1,11 @@
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
         row, col = len(grid), len(grid[0])
-        memo = {}
-        def pathSum(r, c, memo):
-            if r == row-1 and c == col -1:
-                return grid[r][c]
-            if r >= row or c >= col:
-                return float('inf')
-            if (r, c) in memo:
-                return memo[(r,c)]
-            result = min(pathSum(r+1, c, memo), pathSum(r, c+1, memo)) + grid[r][c]
-            memo[(r,c)] = result
-            return result
-
-                
-        return pathSum(0, 0, memo)
+        for i in range(1, row):
+            grid[i][0] = grid[i-1][0] + grid[i][0]
+        for j in range(1, col):
+            grid[0][j] = grid[0][j] + grid[0][j-1]
+        for k in range(1, row):
+            for l in range(1, col):
+                grid[k][l] = min(grid[k-1][l], grid[k][l-1]) + grid[k][l]
+        return grid[-1][-1]                        
