@@ -11,10 +11,9 @@ class Solution(object):
         :type val: int
         :rtype: TreeNode
         """
-        if root is None:
-            return None
         if root.val == val:
             return root
-        left = self.searchBST(root.left, val)
-        right = self.searchBST(root.right, val)
-        return left or right
+        if root.left and root.val > val:
+            return self.searchBST(root.left, val)
+        elif root.right and root.val < val:
+            return self.searchBST(root.right, val)
