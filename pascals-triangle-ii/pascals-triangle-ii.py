@@ -14,9 +14,8 @@ class Solution(object):
                 return 1
             elif col > row or col < 0:
                 return 0
-            ans = helper(row-1, col-1) + helper(row-1, col)
-            arr[row][col] = ans
-            return ans
+            arr[row][col] = helper(row-1, col-1) + helper(row-1, col)
+            return arr[row][col]
         res = []
         for i in range(rowIndex + 1):
             res.append(helper(rowIndex, i))
